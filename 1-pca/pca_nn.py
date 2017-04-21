@@ -30,7 +30,7 @@ sess.run(init)
 
 weights_before = sess.run(w_encode_decode)
 
-iteration = 30000
+iteration = 25000
 batch_size = 3
 
 costs = []
@@ -47,16 +47,12 @@ for iter in range(iteration):
 ################################################################################
 # 5. Check result
 
-weights = sess.run(w_encode_decode)
-example_num = 80
+# weights = np.load('pca_nn_weights.npy') 
+weights =  sess.run(w_encode_decode)
+example_num = 18
 
 example = faces_matrix[:, example_num]
 plt.imshow(example.reshape((112, 92)), cmap='gray')
-plt.show()
-
-coefficients_before = np.dot(centered_faces_matrix[:, example_num], weights_before)
-reconstruction_before = np.dot(weights, coefficients_before) + faces_mean[:, example_num]
-plt.imshow(reconstruction_before.reshape((112, 92)), cmap='gray')
 plt.show()
 
 coefficients = np.dot(centered_faces_matrix[:, example_num], weights)
